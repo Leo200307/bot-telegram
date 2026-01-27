@@ -40,13 +40,30 @@ app.listen(PORT, () => console.log(`🤖 Bot escuchando en puerto ${PORT}`));
 // ------------------ Eventos del bot ------------------
 
 // /start
+// /start
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
 
-    const imageUrl = 'https://i.postimg.cc/J06nmTPH/In-Shot-20250818-200040976.png';
+    const imageUrl = 'https://i.postimg.cc/5Nj7tWBk/img4.jpg';
 
     bot.sendPhoto(chatId, imageUrl, {
-        caption: `👋 Bienvenido ${msg.from.first_name}!\n\n🔥 Accede a mis clases privadas\n👇 Elige un método de pago`,
+        caption: `🙈DHAIL REYES😈
+🔥𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗘𝗧𝗘😉🔥
+
+Hola, me alegro de que finalmente me hayas encontrado🔥🔥
+¿Quieres descubrir el contenido de mi canal VIP 🙈🔥?
+
+Vamos al grano, ambos sabemos por qué estás aquí jeje. Y sí, la pasarás increíble en mi VIP 🫣, pero no te quedes solo con mi palabra 🔥👀🤭
+
+CON UNA PROPINA DE 10 DÓLARES SERÁS PARTE DE MI COMUNIDAD MÁS ESPECIAL💙, DESBLOQUEA FOTOS Y VIDEOS MUY EXCLUSIVOS PARA TI 🔥
+
+🔥𝗟𝗔 𝗦𝗨𝗦𝗖𝗥𝗜𝗣𝗖𝗜𝗢𝗡 𝗗𝗨𝗥𝗔 𝗨𝗡 𝗠𝗘𝗦 𝗖𝗢𝗠𝗢 𝗢𝗡𝗟𝗬𝗙𝗔𝗡𝗦🔥😈
+(𝗘𝗫𝗖𝗟𝗨𝗦𝗜𝗩𝗢 𝗖𝗢𝗡𝗧𝗘𝗡𝗜𝗗𝗢 𝗦𝗢𝗟𝗢 𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗧𝗢𝗥𝗘𝗦) 𝗚𝗥𝗨𝗣𝗢 𝗩𝗜𝗣
+
+👉 ¡Sigue el siguiente paso para empezar!`
+    });
+
+    bot.sendMessage(chatId, '👇 Elige un método de pago', {
         reply_markup: {
             inline_keyboard: [
                 [{ text: "💳 Método de pago", callback_data: "metodo_pago" }]
@@ -54,6 +71,7 @@ bot.onText(/\/start/, (msg) => {
         }
     });
 });
+
 
 // Manejo de botones
 bot.on('callback_query', async (query) => {
@@ -65,8 +83,11 @@ bot.on('callback_query', async (query) => {
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                    media: 'https://i.postimg.cc/bwKZsB8H/In_Shot_20250814_143838908.png',
-                    caption: `💰 Elige tu método de pago`,
+                    media: 'https://i.postimg.cc/NFF4LRHP/img5.jpg',
+                      caption: `𝗛𝗢𝗟𝗜 💕🔥
+TODOS MIS METODOS DE PAGO 🥰💕
+📌𝗕𝗢𝗟𝗜𝗩𝗜𝗔: 🇧🇴
+📌𝗘𝗫𝗧𝗥𝗔𝗡𝗝𝗘𝗥𝗢: 🇲🇽🇦🇷🇺🇸🌍`,
                 },
                 {
                     chat_id: chatId,
@@ -85,7 +106,11 @@ bot.on('callback_query', async (query) => {
                 {
                     type: 'photo',
                     media: 'https://i.postimg.cc/s243s6gm/In-Shot-20240907-120937037.png',
-                    caption: `🇧🇴 Pago por QR Bolivia\n📲 Escanea el QR y envía tu comprobante`,
+                    caption: `🇧🇴 **PAGAR 100 BS**\n
+📌 **SACA UNA CAPTURA Y PÁGALO**\n
+⬇️ **ENVÍA EL COMPROBANTE, IMAGEN O DOCUMENTO** ⬇️\n
+————————————\n
+📌 **PUEDES (𝗩𝗢𝗟𝗩𝗘𝗥 𝗔𝗧𝗥𝗔𝗦🔙) SI TE EQUIVOCASTE DE SELECCIÓN**`,
                 },
                 {
                     chat_id: chatId,
@@ -102,8 +127,12 @@ bot.on('callback_query', async (query) => {
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                    media: 'https://i.postimg.cc/Pxfvj8T0/In-Shot-20240907-120918573.png',
-                    caption: `💳 Pago por PayPal\n📧 Correo: paypal@tucorreo.com\n📩 Envía tu comprobante`,
+                    media: 'https://i.postimg.cc/5y4rgHF9/depositphotos-220680152-stock-illustration-paypal-logo-printed-white-paper.jpg',
+                  caption: `📌 **MARCA (𝗣𝗔𝗚𝗢 𝗣𝗢𝗥 𝗣𝗔𝗬𝗣𝗔𝗟💗)**\n
+⬇️ **ENVÍA TU CORREO ELECTRÓNICO PARA HACER EL COBRO**\n
+——————————————\n
+📌 **MONTO 10$**\n
+📌 **PUEDES (𝗩𝗢𝗟𝗩𝗘𝗥 𝗔𝗧𝗥𝗔𝗦🔙) SI TE EQUIVOCASTE DE SELECCIÓN**`,
                 },
                 {
                     chat_id: chatId,
@@ -111,7 +140,7 @@ bot.on('callback_query', async (query) => {
                     reply_markup: {
                         inline_keyboard: [
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
-                            [{ text: '✅ Ya pagué, enviar captura', url: 'https://t.me/agentedeinformacion' }]
+                            [{ text: '✅ enviar correo aqui', url: 'https://t.me/agentedeinformacion' }]
                         ]
                     }
                 }
@@ -120,8 +149,15 @@ bot.on('callback_query', async (query) => {
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                    media: 'https://i.postimg.cc/J06nmTPH/In-Shot-20250818-200040976.png',
-                    caption: `👋 Bienvenido ${query.from.first_name}!\n\n🔥 Accede a mis clases privadas\n👇 Elige un método de pago`,
+                    media: 'https://i.postimg.cc/5Nj7tWBk/img4.jpg',
+                     caption: `🙈 **DHAIL REYES😈**\n
+🔥 **𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗘𝗧𝗘😉🔥**\n
+Hola, me alegro de que finalmente me hayas encontrado 🔥🔥\n
+Quieres descubrir el contenido de mi canal VIP 🙈🔥\n\n
+Vamos al grano, ambos sabemos por qué estás aquí jeje. Y sí, la pasarás increíble en mi VIP 🫣 pero no te quedes solo con mi palabra 🔥👀🤭\n\n
+CON UNA PROPINA DE 10 DOLARES SERÁS PARTE DE MI COMUNIDAD MÁS ESPECIAL💙, DESBLOQUEA FOTOS Y VIDEOS MUY EXCLUSIVOS PARA TI 🔥\n\n
+🔥 **𝗟𝗔 𝗦𝗨𝗦𝗖𝗥𝗜𝗣𝗖𝗜𝗢𝗡 𝗗𝗨𝗥𝗔 𝗨𝗡 𝗠𝗘𝗦 𝗖𝗢𝗠𝗢 𝗢𝗡𝗟𝗬𝗙𝗔𝗡𝗦🔥😈**\n
+(𝗘𝗫𝗖𝗟𝗨𝗦𝗜𝗩𝗢 𝗖𝗢𝗡𝗧𝗘𝗡𝗜𝗗𝗢 𝗦𝗢𝗟𝗢 𝗦𝗨𝗦𝗖𝗥𝗜𝗣𝗧𝗢𝗥𝗘𝗦) 𝗚𝗥𝗨𝗣𝗢 𝗩𝗜𝗣`,
                 },
                 {
                     chat_id: chatId,
