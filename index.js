@@ -40,10 +40,11 @@ app.listen(PORT, () => console.log(`🤖 Bot escuchando en puerto ${PORT}`));
 // ------------------ Eventos del bot ------------------
 
 // /start
+// /start
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
 
-    // Enviar la imagen de bienvenida primero
+    // Enviar la imagen de bienvenida primero y después el mensaje con el botón
     const imageUrl = 'https://i.postimg.cc/5Nj7tWBk/img4.jpg';
 
     bot.sendPhoto(chatId, imageUrl, {
@@ -61,17 +62,18 @@ CON UNA PROPINA DE 10 DÓLARES SERÁS PARTE DE MI COMUNIDAD MÁS ESPECIAL💙, D
 (𝗘𝗫𝗖𝗟𝗨𝗦𝗜𝗩𝗢 𝗖𝗢𝗡𝗧𝗘𝗡𝗜𝗗𝗢 𝗦𝗢𝗟𝗢 𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗧𝗢𝗥𝗘𝗦) 𝗚𝗥𝗨𝗣𝗢 𝗩𝗜𝗣
 
 👉 ¡Sigue el siguiente paso para empezar!`
-    });
-
-    // Después de la imagen de bienvenida, enviar el botón de método de pago
-    bot.sendMessage(chatId, '👇 Elige un método de pago', {
-        reply_markup: {
-            inline_keyboard: [
-                [{ text: "💳 Método de pago", callback_data: "metodo_pago" }]
-            ]
-        }
+    }).then(() => {
+        // Después de la imagen de bienvenida, enviar el mensaje con los botones
+        bot.sendMessage(chatId, '👇 Elige un método de pago', {
+            reply_markup: {
+                inline_keyboard: [
+                    [{ text: "💳 Método de pago", callback_data: "metodo_pago" }]
+                ]
+            }
+        });
     });
 });
+
 
 // Manejo de botones
 bot.on('callback_query', async (query) => {
