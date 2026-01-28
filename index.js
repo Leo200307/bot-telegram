@@ -67,7 +67,7 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
         try {
             await bot.sendMessage(
                 update.message.chat.id,
-                "⏳ Activando el bot… un segundito 😅"
+                "💙💙  BIENVENIDO  💙💙"
             );
         } catch (e) {
             console.log("Mensaje rápido falló:", e.message);
