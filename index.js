@@ -1,68 +1,31 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 
-// 🔐 Token del bot
+// ================== VARIABLES ==================
 const TOKEN = process.env.BOT_TOKEN;
 if (!TOKEN) {
     console.error("❌ ERROR: BOT_TOKEN no definido");
     process.exit(1);
 }
 
-// 🌐 URL pública de Render
 const URL = process.env.RENDER_EXTERNAL_URL;
 if (!URL) {
     console.error("❌ ERROR: RENDER_EXTERNAL_URL no detectado");
     process.exit(1);
 }
 
+// ================== APP EXPRESS ==================
 const app = express();
 app.use(express.json());
 
-// 🤖 Bot SIN polling
+// ================== BOT WEBHOOK ==================
 const bot = new TelegramBot(TOKEN);
 
-// 🔗 Webhook
+// Webhook
 bot.setWebHook(`${URL}/bot${TOKEN}`);
 
-// 🚀 WEBHOOK CON MENSAJE RÁPIDO (ANTI SLEEP)
-app.post(`/bot${TOKEN}`, async (req, res) => {
-    // responder rápido a Telegram
-    res.sendStatus(200);
-
-    const update = req.body;
-
-    // mensaje rápido SOLO si es mensaje
-    if (update.message && update.message.chat) {
-        const chatId = update.message.chat.id;
-        try {
-            await bot.sendMessage(
-                chatId,
-                "⏳ Activando el bot… un segundito 😅"
-            );
-        } catch (e) {
-            console.log("Mensaje rápido falló:", e.message);
-        }
-    }
-
-    // procesar normal
-    bot.processUpdate(update);
-});
-
-// 🧪 Página test
-app.get('/', (req, res) => res.send('Bot activo 🚀'));
-
-// 🔌 Puerto Render
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-    console.log(`🤖 Bot escuchando en puerto ${PORT}`)
-);
-
-
-
-// ================== /START ==================
-bot.onText(/\/start/, async (msg) => {
-    const chatId = msg.chat.id;
-
+// ================== FUNCIÓN BIENVENIDA ==================
+async function sendWelcome(chatId) {
     await bot.sendPhoto(chatId, 'https://i.postimg.cc/5Nj7tWBk/img4.jpg', {
         caption: `🙈 **DHAIL REYES😈**
 
@@ -81,16 +44,51 @@ Desbloqueas fotos y videos MUY exclusivos 🔥
 Tipo OnlyFans 😈  
 (Contenido SOLO para suscriptores VIP)
 
-👇 Elige un método de pago para empezar`
-        ,
+👇 Elige un método de pago para empezar`,
         reply_markup: {
             inline_keyboard: [
                 [{ text: "💳 Método de pago", callback_data: "metodo_pago" }]
             ]
         }
     });
+}
+
+// ================== WEBHOOK HANDLER ==================
+app.post(`/bot${TOKEN}`, async (req, res) => {
+    res.sendStatus(200);
+
+    const update = req.body;
+
+    // Mensaje rápido anti-sleep
+    if (update.message && update.message.chat) {
+        try {
+            await bot.sendMessage(
+                update.message.chat.id,
+                "⏳ Activando el bot… un segundito 😅"
+            );
+        } catch (e) {
+            console.log("Mensaje rápido falló:", e.message);
+        }
+    }
+
+    bot.processUpdate(update);
 });
 
+// ================== ENDPOINT UPTIMEROBOT ==================
+app.get('/', (req, res) => {
+    res.send('Bot activo 🚀');
+});
+
+// ================== PUERTO ==================
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🤖 Bot escuchando en puerto ${PORT}`);
+});
+
+// ================== /START ==================
+bot.onText(/\/start/, async (msg) => {
+    await sendWelcome(msg.chat.id);
+});
 
 // ================== BOTONES ==================
 bot.on('callback_query', async (query) => {
@@ -98,6 +96,8 @@ bot.on('callback_query', async (query) => {
     const messageId = query.message.message_id;
 
     try {
+
+        // ===== MENÚ MÉTODOS =====
         if (query.data === 'metodo_pago') {
             await bot.editMessageMedia(
                 {
@@ -123,6 +123,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             );
         }
 
+        // ===== QR BOLIVIA =====
         else if (query.data === 'qr_bolivia') {
             await bot.editMessageMedia(
                 {
@@ -146,6 +147,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             );
         }
 
+        // ===== PAYPAL =====
         else if (query.data === 'paypal') {
             await bot.editMessageMedia(
                 {
@@ -169,10 +171,13 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             );
         }
 
+        // ===== VOLVER AL INICIO =====
         else if (query.data === 'volver') {
-            // vuelve a la bienvenida (UNA SOLA)
-            bot.emit('text', { text: '/start', chat: { id: chatId } });
+            await sendWelcome(chatId);
         }
+
+        // cerrar loading
+        await bot.answerCallbackQuery(query.id);
 
     } catch (e) {
         console.log('❌ Error:', e.description || e.message);
