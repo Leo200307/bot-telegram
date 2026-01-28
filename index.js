@@ -25,8 +25,10 @@ const bot = new TelegramBot(TOKEN);
 bot.setWebHook(`${URL}/bot${TOKEN}`);
 
 // ================== FUNCIÓN BIENVENIDA ==================
-async function sendWelcome(chatId) {
-    await bot.sendPhoto(chatId, 'https://i.postimg.cc/5Nj7tWBk/img4.jpg', {
+function getWelcomeMessage() {
+    return {
+        type: 'photo',
+        media: 'https://i.postimg.cc/5Nj7tWBk/img4.jpg',
         caption: `🙈 **DHAIL REYES😈**
 
 🔥 **𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗘𝗧𝗘😉🔥**
@@ -38,6 +40,7 @@ Vamos al grano, ambos sabemos por qué estás aquí jeje 😏
 Y sí, la pasarás increíble en mi VIP 🫣🔥
 
 💙 **CON UNA PROPINA DE 10 DÓLARES**  
+Seras parte de mi comunidad mas especial,
 Desbloqueas fotos y videos MUY exclusivos 🔥
 
 🔥 **𝗟𝗔 𝗦𝗨𝗦𝗖𝗥𝗜𝗣𝗖𝗜𝗢𝗡 𝗗𝗨𝗥𝗔 𝗨𝗡 𝗠𝗘𝗦**  
@@ -50,7 +53,7 @@ Tipo OnlyFans 😈
                 [{ text: "💳 Método de pago", callback_data: "metodo_pago" }]
             ]
         }
-    });
+    };
 }
 
 // ================== WEBHOOK HANDLER ==================
@@ -87,7 +90,8 @@ app.listen(PORT, () => {
 
 // ================== /START ==================
 bot.onText(/\/start/, async (msg) => {
-    await sendWelcome(msg.chat.id);
+    const chatId = msg.chat.id;
+    await bot.sendPhoto(chatId, getWelcomeMessage().media, getWelcomeMessage());
 });
 
 // ================== BOTONES ==================
@@ -131,8 +135,8 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                     media: 'https://i.postimg.cc/vTN16cKj/Whats-App-Image-2026-01-27-at-09-05-41.jpg',
                     caption: `🇧🇴 **PAGAR 100 BS**
 
-📌 Saca una captura y paga  
-⬇️ Envía el comprobante ⬇️`,
+📌 Saca una captura y pagalo por tu banca  
+⬇️ Envía el comprobante de recibo de pago⬇️`,
                 },
                 {
                     chat_id: chatId,
@@ -171,9 +175,20 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             );
         }
 
-        // ===== VOLVER AL INICIO =====
+        // ===== VOLVER AL INICIO (EDITAR MENSAJE) =====
         else if (query.data === 'volver') {
-            await sendWelcome(chatId);
+            await bot.editMessageMedia(
+                {
+                    type: 'photo',
+                    media: getWelcomeMessage().media,
+                    caption: getWelcomeMessage().caption
+                },
+                {
+                    chat_id: chatId,
+                    message_id: messageId,
+                    reply_markup: getWelcomeMessage().reply_markup
+                }
+            );
         }
 
         // cerrar loading
