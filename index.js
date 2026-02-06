@@ -132,7 +132,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                    media: 'https://i.postimg.cc/vTN16cKj/Whats-App-Image-2026-01-27-at-09-05-41.jpg',
+                    media: 'https://i.postimg.cc/ZKg7Tq3N/Whats-App-Image-2026-02-06-at-14-11-31.jpg',
                     caption: `🇧🇴 **PAGAR 100 BS**
 
 📌 Saca una captura y pagalo por tu banca  
