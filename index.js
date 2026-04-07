@@ -28,10 +28,10 @@ bot.setWebHook(`${URL}/bot${TOKEN}`);
 function getWelcomeMessage() {
     return {
         type: 'photo',
-        media: 'https://i.postimg.cc/5Nj7tWBk/img4.jpg',
-        caption: `🙈 **DHAIL REYES😈**
+        media: 'https://i.postimg.cc/5y37nZcd/img2.jpg',
+        caption: `🙈 *Yohana Rojas😈*
 
-🔥 **𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗘𝗧𝗘😉🔥**
+🔥 **𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗘𝗧𝗘😉 SEMANA PROMOCIONAL🔥**
 
 Hola, me alegro de que finalmente me hayas encontrado 🔥🔥  
 ¿Quieres descubrir el contenido de mi canal VIP 🙈🔥?
@@ -39,13 +39,10 @@ Hola, me alegro de que finalmente me hayas encontrado 🔥🔥
 Vamos al grano, ambos sabemos por qué estás aquí jeje 😏  
 Y sí, la pasarás increíble en mi VIP 🫣🔥
 
-💙 **CON UNA PROPINA DE 10 DÓLARES**  
+💙 ** CON UNA PROPINA DE 16.50 DÓLARES**  
 Seras parte de mi comunidad mas especial,
 Desbloqueas fotos y videos MUY exclusivos 🔥
 
-🔥 **𝗟𝗔 𝗦𝗨𝗦𝗖𝗥𝗜𝗣𝗖𝗜𝗢𝗡 𝗗𝗨𝗥𝗔 𝗨𝗡 𝗠𝗘𝗦**  
-Tipo OnlyFans 😈  
-(Contenido SOLO para suscriptores VIP)
 
 👇 Elige un método de pago para empezar`,
         reply_markup: {
@@ -62,7 +59,6 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
 
     const update = req.body;
 
-    // Mensaje rápido anti-sleep
     if (update.message && update.message.chat) {
         try {
             await bot.sendMessage(
@@ -106,7 +102,7 @@ bot.on('callback_query', async (query) => {
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                    media: 'https://i.postimg.cc/NFF4LRHP/img5.jpg',
+                      media: 'https://i.postimg.cc/0Q1Vx8xh/img7.jpg',
                     caption: `𝗛𝗢𝗟𝗜 💕🔥
 TODOS MIS MÉTODOS DE PAGO 🥰
 
@@ -120,6 +116,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                         inline_keyboard: [
                             [{ text: '🇧🇴 QR Bolivia', callback_data: 'qr_bolivia' }],
                             [{ text: '💳 PayPal', callback_data: 'paypal' }],
+                            [{ text: '💳 Pago con tarjeta', callback_data: 'tarjeta' }],
                             [{ text: '⬅️ Volver', callback_data: 'volver' }]
                         ]
                     }
@@ -132,8 +129,8 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                    media: 'https://i.postimg.cc/6TxsTB8D/Whats-App-Image-2026-02-07-at-14-20-17.jpg',
-                    caption: `🇧🇴 **PAGAR 100 BS**
+                      media: 'https://i.postimg.cc/gjXjDPLn/IMG_20260127_WA0000(1).jpg',
+                    caption: `🇧🇴 * PAGA 100 BS*
 
 📌 Saca una captura y pagalo por tu banca  
 ⬇️ Envía el comprobante de recibo de pago⬇️`,
@@ -144,7 +141,10 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                     reply_markup: {
                         inline_keyboard: [
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
-                            [{ text: '✅ Ya pagué', url: 'https://t.me/agentedeinformacion' }]
+                            [{ 
+  text: '✅ Ya pagué', 
+  url: 'https://t.me/agentedeinformacion?text=Hola%20Yohana,%20te%20mando%20la%20captura,%20pagué%20por%20QR%20Bolivia' 
+}]
                         ]
                     }
                 }
@@ -159,8 +159,10 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                     media: 'https://i.postimg.cc/5y4rgHF9/depositphotos-220680152-stock-illustration-paypal-logo-printed-white-paper.jpg',
                     caption: `💳 **PAGO POR PAYPAL**
 
-📌 Monto: **10 USD**
-⬇️ Envía tu correo para el cobro ⬇️`,
+📌 Monto: **16.50 USD**
+📧 \`alejandrohinojosasoria237@gmail.com\`
+
+Envía tu captura después del pago 💎`,
                 },
                 {
                     chat_id: chatId,
@@ -168,14 +170,51 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                     reply_markup: {
                         inline_keyboard: [
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
-                            [{ text: '✅ Enviar correo', url: 'https://t.me/agentedeinformacion' }]
+                            [{ 
+  text: '✅ Enviar captura', 
+  url: 'https://t.me/agentedeinformacion?text=Hola%20Yohana,%20te%20mando%20la%20captura,%20pagué%20por%20PayPal' 
+}]
                         ]
                     }
                 }
             );
         }
 
-        // ===== VOLVER AL INICIO (EDITAR MENSAJE) =====
+        // ===== PAGO CON TARJETA =====
+        else if (query.data === 'tarjeta') {
+            await bot.editMessageMedia(
+                {
+                    type: 'photo',
+                    media: 'https://i.postimg.cc/NMF1X4FH/Screenshot_20260213_110627_Chrome.jpg',
+                    caption: `💳 **SUSCRIPCIÓN CON TARJETA**
+
+La suscripción por tarjeta es de **16.50 USD**  
+
+**Pasos para pagar:**
+
+1️⃣ Presiona el botón **Ir a pagar**  
+2️⃣ Coloca tu correo (recibirás un código)  
+3️⃣ Ingresa los datos de tu tarjeta  
+4️⃣ Envía la captura de la transacción`,
+                },
+                {
+                    chat_id: chatId,
+                    message_id: messageId,
+                    reply_markup: {
+                        inline_keyboard: [
+                                  [{ text: '💳 Ir a pagar', url: 'https://app.takenos.com/pay/e780acf4-6101-41cc-91e3-913f7ec498dd' }],
+                            [{ 
+  text: '📤 Enviar captura', 
+  url: 'https://t.me/agentedeinformacion?text=Hola%20Yohana,%20te%20mando%20la%20captura,%20pagué%20con%20tarjeta' 
+}],
+                            [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }]
+                        ]
+                    }
+                }
+            );
+        }
+
+        // ===== VOLVER AL INICIO =====
         else if (query.data === 'volver') {
             await bot.editMessageMedia(
                 {
@@ -191,7 +230,6 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             );
         }
 
-        // cerrar loading
         await bot.answerCallbackQuery(query.id);
 
     } catch (e) {
