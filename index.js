@@ -28,8 +28,8 @@ bot.setWebHook(`${URL}/bot${TOKEN}`);
 function getWelcomeMessage() {
     return {
         type: 'photo',
-        media: 'https://i.postimg.cc/5y37nZcd/img2.jpg',
-        caption: `🙈 *Yohana Rojas😈*
+        media: 'https://i.postimg.cc/kGVFzf9m/In-Shot-20260601-131940470.jpg',
+        caption: `🙈 *PAMELA😈*
 
 🔥 **𝗦𝗨𝗦𝗖𝗥𝗜𝗕𝗘𝗧𝗘😉 SEMANA PROMOCIONAL🔥**
 
@@ -102,7 +102,7 @@ bot.on('callback_query', async (query) => {
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                      media: 'https://i.postimg.cc/0Q1Vx8xh/img7.jpg',
+                      media: 'https://i.postimg.cc/8C1dN1ND/In-Shot-20260601-132018798.jpg',
                     caption: `𝗛𝗢𝗟𝗜 💕🔥
 TODOS MIS MÉTODOS DE PAGO 🥰
 
@@ -143,7 +143,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
                             [{ 
   text: '✅ Ya pagué', 
-  url: 'https://t.me/agentedeinformacion?text=Hola%20Yohana,%20te%20mando%20la%20captura,%20pagué%20por%20QR%20Bolivia' 
+  url: 'https://t.me/agentedeinformacion?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20por%20QR%20Bolivia' 
 }]
                         ]
                     }
@@ -172,7 +172,7 @@ Envía tu captura después del pago 💎`,
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
                             [{ 
   text: '✅ Enviar captura', 
-  url: 'https://t.me/agentedeinformacion?text=Hola%20Yohana,%20te%20mando%20la%20captura,%20pagué%20por%20PayPal' 
+  url: 'https://t.me/agentedeinformacion?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20por%20PayPal' 
 }]
                         ]
                     }
@@ -202,10 +202,10 @@ La suscripción por tarjeta es de **16.50 USD**
                     message_id: messageId,
                     reply_markup: {
                         inline_keyboard: [
-                                  [{ text: '💳 Ir a pagar', url: 'https://app.takenos.com/pay/e780acf4-6101-41cc-91e3-913f7ec498dd' }],
+                                  [{ text: '💳 Ir a pagar', url: 'https://app.takenos.com/pay/c5fe9293-c7e7-4d8a-8ca6-320ecfa6676a' }],
                             [{ 
   text: '📤 Enviar captura', 
-  url: 'https://t.me/agentedeinformacion?text=Hola%20Yohana,%20te%20mando%20la%20captura,%20pagué%20con%20tarjeta' 
+  url: 'https://t.me/agentedeinformacion?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20con%20tarjeta' 
 }],
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }]
                         ]
