@@ -129,7 +129,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                      media: 'https://i.postimg.cc/gjXjDPLn/IMG_20260127_WA0000(1).jpg',
+                      media: 'https://i.postimg.cc/XvnjMXRC/IMG-20260602-WA0016.jpg',
                     caption: `🇧🇴 * PAGA 100 BS*
 
 📌 Saca una captura y pagalo por tu banca  
