@@ -14,6 +14,11 @@ if (!URL) {
     process.exit(1);
 }
 
+// 🔐 ================= LISTA DE IDS PERMITIDOS =================
+// Pon aquí adentro los Chat IDs numéricos que SÍ pueden usar el bot.
+// Ejemplo: [123456789, 987654321]
+const IDS_PERMITIDOS = [8845787780]; 
+
 // ================== APP EXPRESS ==================
 const app = express();
 app.use(express.json());
@@ -60,6 +65,11 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
     const update = req.body;
 
     if (update.message && update.message.chat) {
+        // Filtro de seguridad también en el mensaje rápido de bienvenida
+        if (!IDS_PERMITIDOS.includes(update.message.chat.id)) {
+            return; 
+        }
+
         try {
             await bot.sendMessage(
                 update.message.chat.id,
@@ -87,6 +97,13 @@ app.listen(PORT, () => {
 // ================== /START ==================
 bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
+    
+    // 🛡️ CANDADO DE SEGURIDAD
+    if (!IDS_PERMITIDOS.includes(chatId)) {
+        console.log(`🚫 Acceso denegado al /start del ID: ${chatId}`);
+        return; // Si no está en la lista, el bot se queda mudo y no hace nada
+    }
+
     await bot.sendPhoto(chatId, getWelcomeMessage().media, getWelcomeMessage());
 });
 
@@ -95,6 +112,15 @@ bot.on('callback_query', async (query) => {
     const chatId = query.message.chat.id;
     const messageId = query.message.message_id;
 
+    // 🛡️ CANDADO DE SEGURIDAD PARA LOS BOTONES
+    if (!IDS_PERMITIDOS.includes(chatId)) {
+        await bot.answerCallbackQuery(query.id, { 
+            text: "❌ No tienes permiso para usar este bot.", 
+            show_alert: true 
+        });
+        return;
+    }
+
     try {
 
         // ===== MENÚ MÉTODOS =====
@@ -102,7 +128,7 @@ bot.on('callback_query', async (query) => {
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                      media: 'https://i.postimg.cc/kGVFzf9m/In-Shot-20260601-131940470.jpg',
+                    media: 'https://i.postimg.cc/kGVFzf9m/In-Shot-20260601-131940470.jpg',
                     caption: `𝗛𝗢𝗟𝗜 💕🔥
 TODOS MIS MÉTODOS DE PAGO 🥰
 
@@ -129,7 +155,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
             await bot.editMessageMedia(
                 {
                     type: 'photo',
-                      media: 'https://i.postimg.cc/T2bLT8Zf/IMG-20260603-WA0023.jpg',
+                    media: 'https://i.postimg.cc/T2bLT8Zf/IMG-20260603-WA0023.jpg',
                     caption: `🇧🇴 * PAGA 100 BS*
 
 📌 Saca una captura y pagalo por tu banca  
