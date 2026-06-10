@@ -14,9 +14,6 @@ if (!URL) {
     process.exit(1);
 }
 
-// 🔐 ID EXCLUSIVO AUTORIZADO
-const ID_PERMITIDO = 8845787780;
-
 // ================== APP EXPRESS ==================
 const app = express();
 app.use(express.json());
@@ -42,7 +39,8 @@ Hola, me alegro de que finalmente me hayas encontrado 🔥🔥
 Vamos al grano, ambos sabemos por qué estás aquí jeje 😏  
 Y sí, la pasarás increíble en mi VIP 🫣🔥
 
-💙 ** CON UNA PROPINA DE 16.50 DÓLARES** Seras parte de mi comunidad mas especial,
+💙 ** CON UNA PROPINA DE 16.50 DÓLARES**  
+Seras parte de mi comunidad mas especial,
 Desbloqueas fotos y videos MUY exclusivos 🔥
 
 
@@ -62,11 +60,6 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
     const update = req.body;
 
     if (update.message && update.message.chat) {
-        // 🛡️ Filtro para el mensaje rápido de bienvenida
-        if (update.message.chat.id !== ID_PERMITIDO) {
-            return;
-        }
-
         try {
             await bot.sendMessage(
                 update.message.chat.id,
@@ -94,12 +87,6 @@ app.listen(PORT, () => {
 // ================== /START ==================
 bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
-    
-    // 🛡️ Filtro para el comando /start
-    if (chatId !== ID_PERMITIDO) {
-        return;
-    }
-
     await bot.sendPhoto(chatId, getWelcomeMessage().media, getWelcomeMessage());
 });
 
@@ -107,12 +94,6 @@ bot.onText(/\/start/, async (msg) => {
 bot.on('callback_query', async (query) => {
     const chatId = query.message.chat.id;
     const messageId = query.message.message_id;
-
-    // 🛡️ Filtro para los botones
-    if (chatId !== ID_PERMITIDO) {
-        await bot.answerCallbackQuery(query.id);
-        return;
-    }
 
     try {
 
@@ -207,9 +188,12 @@ Envía tu captura después del pago 💎`,
                     media: 'https://i.postimg.cc/NMF1X4FH/Screenshot_20260213_110627_Chrome.jpg',
                     caption: `💳 **SUSCRIPCIÓN CON TARJETA**
 
-La suscripción por tarjeta es de **16.50 USD** **Pasos para pagar:**
+La suscripción por tarjeta es de **16.50 USD**  
 
-1️⃣ Presiona el botón **Ir a pagar** 2️⃣ Coloca tu correo (recibirás un código)  
+**Pasos para pagar:**
+
+1️⃣ Presiona el botón **Ir a pagar**  
+2️⃣ Coloca tu correo (recibirás un código)  
 3️⃣ Ingresa los datos de tu tarjeta  
 4️⃣ Envía la captura de la transacción`,
                 },
