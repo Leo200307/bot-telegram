@@ -14,10 +14,8 @@ if (!URL) {
     process.exit(1);
 }
 
-// 🔐 ================= LISTA DE IDS PERMITIDOS =================
-// Pon aquí adentro los Chat IDs numéricos que SÍ pueden usar el bot.
-// Ejemplo: [123456789, 987654321]
-const IDS_PERMITIDOS = [8845787780]; 
+// 🔐 ID EXCLUSIVO AUTORIZADO
+const ID_PERMITIDO = 8845787780;
 
 // ================== APP EXPRESS ==================
 const app = express();
@@ -44,8 +42,7 @@ Hola, me alegro de que finalmente me hayas encontrado 🔥🔥
 Vamos al grano, ambos sabemos por qué estás aquí jeje 😏  
 Y sí, la pasarás increíble en mi VIP 🫣🔥
 
-💙 ** CON UNA PROPINA DE 16.50 DÓLARES**  
-Seras parte de mi comunidad mas especial,
+💙 ** CON UNA PROPINA DE 16.50 DÓLARES** Seras parte de mi comunidad mas especial,
 Desbloqueas fotos y videos MUY exclusivos 🔥
 
 
@@ -65,9 +62,9 @@ app.post(`/bot${TOKEN}`, async (req, res) => {
     const update = req.body;
 
     if (update.message && update.message.chat) {
-        // Filtro de seguridad también en el mensaje rápido de bienvenida
-        if (!IDS_PERMITIDOS.includes(update.message.chat.id)) {
-            return; 
+        // 🛡️ Filtro para el mensaje rápido de bienvenida
+        if (update.message.chat.id !== ID_PERMITIDO) {
+            return;
         }
 
         try {
@@ -98,10 +95,9 @@ app.listen(PORT, () => {
 bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
     
-    // 🛡️ CANDADO DE SEGURIDAD
-    if (!IDS_PERMITIDOS.includes(chatId)) {
-        console.log(`🚫 Acceso denegado al /start del ID: ${chatId}`);
-        return; // Si no está en la lista, el bot se queda mudo y no hace nada
+    // 🛡️ Filtro para el comando /start
+    if (chatId !== ID_PERMITIDO) {
+        return;
     }
 
     await bot.sendPhoto(chatId, getWelcomeMessage().media, getWelcomeMessage());
@@ -112,12 +108,9 @@ bot.on('callback_query', async (query) => {
     const chatId = query.message.chat.id;
     const messageId = query.message.message_id;
 
-    // 🛡️ CANDADO DE SEGURIDAD PARA LOS BOTONES
-    if (!IDS_PERMITIDOS.includes(chatId)) {
-        await bot.answerCallbackQuery(query.id, { 
-            text: "❌ No tienes permiso para usar este bot.", 
-            show_alert: true 
-        });
+    // 🛡️ Filtro para los botones
+    if (chatId !== ID_PERMITIDO) {
+        await bot.answerCallbackQuery(query.id);
         return;
     }
 
@@ -214,12 +207,9 @@ Envía tu captura después del pago 💎`,
                     media: 'https://i.postimg.cc/NMF1X4FH/Screenshot_20260213_110627_Chrome.jpg',
                     caption: `💳 **SUSCRIPCIÓN CON TARJETA**
 
-La suscripción por tarjeta es de **16.50 USD**  
+La suscripción por tarjeta es de **16.50 USD** **Pasos para pagar:**
 
-**Pasos para pagar:**
-
-1️⃣ Presiona el botón **Ir a pagar**  
-2️⃣ Coloca tu correo (recibirás un código)  
+1️⃣ Presiona el botón **Ir a pagar** 2️⃣ Coloca tu correo (recibirás un código)  
 3️⃣ Ingresa los datos de tu tarjeta  
 4️⃣ Envía la captura de la transacción`,
                 },
