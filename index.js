@@ -143,7 +143,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
                             [{ 
   text: '✅ Ya pagué', 
-  url: 'https://t.me/agentedeinformacion?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20por%20QR%20Bolivia' 
+  url: 'https://t.me/bebecita0077?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20por%20QR%20Bolivia' 
 }]
                         ]
                     }
@@ -172,7 +172,7 @@ Envía tu captura después del pago 💎`,
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
                             [{ 
   text: '✅ Enviar captura', 
-  url: 'https://t.me/agentedeinformacion?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20por%20PayPal' 
+  url: 'https://t.me/bebecita0077?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20por%20PayPal' 
 }]
                         ]
                     }
@@ -205,7 +205,7 @@ La suscripción por tarjeta es de **16.50 USD**
                                   [{ text: '💳 Ir a pagar', url: 'https://app.takenos.com/pay/c5fe9293-c7e7-4d8a-8ca6-320ecfa6676a' }],
                             [{ 
   text: '📤 Enviar captura', 
-  url: 'https://t.me/agentedeinformacion?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20con%20tarjeta' 
+  url: 'https://t.me/bebecita0077?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20con%20tarjeta' 
 }],
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }]
                         ]
