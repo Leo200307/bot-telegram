@@ -117,6 +117,7 @@ TODOS MIS MÉTODOS DE PAGO 🥰
                             [{ text: '🇧🇴 QR Bolivia', callback_data: 'qr_bolivia' }],
                             [{ text: '💳 PayPal', callback_data: 'paypal' }],
                             [{ text: '💳 Pago con tarjeta', callback_data: 'tarjeta' }],
+                            [{ text: '🪙 Pago con Binance', callback_data: 'binance' }],
                             [{ text: '⬅️ Volver', callback_data: 'volver' }]
                         ]
                     }
@@ -208,6 +209,35 @@ La suscripción por tarjeta es de **16.50 USD**
   url: 'https://t.me/bebecita0077?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20con%20tarjeta' 
 }],
                             [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }]
+                        ]
+                    }
+                }
+            );
+        }
+
+
+             // ===== BINANCE =====
+        else if (query.data === 'binance') {
+            await bot.editMessageMedia(
+                {
+                    type: 'photo',
+                    media: 'https://i.postimg.cc/CKtg2Szr/qr-image-1782236712160.png',
+                    caption: `💳 **PAGO POR BINANCE**
+
+📌 Monto: **16.50 USDT**
+
+Envía tu captura después del pago 💎`,
+                },
+                {
+                    chat_id: chatId,
+                    message_id: messageId,
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: '⬅️ Volver', callback_data: 'metodo_pago' }],
+                            [{ 
+  text: '✅ Enviar captura', 
+  url: 'https://t.me/bebecita0077?text=Hola%20Pamela,%20te%20mando%20la%20captura,%20pagué%20por%20Binance' 
+}]
                         ]
                     }
                 }
